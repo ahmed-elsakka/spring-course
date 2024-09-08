@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Pizza Maker</title>
+        <link rel="stylesheet" th:href="@{/styles.css}" />
+    </head>
+
+    <body>
+        <h1>Design your Pizza!</h1>
+        <img th:src="@{/images/Logo.png}"/>
+
+        <form method="POST" th:object="${pizza}">
+            <span class="validationError" th:if="${#fields.hasErrors('ingredients')}" th:errors="*{ingredients}"></span>
+            <div class="grid">
+                <div class="ingredient-group" id="proteins">
+                    <h3>Pick your protein:</h3>
+                    <div th:each="ingredient: ${protein}">
+                        <input name="ingredients" type="checkbox" th:value="${ingredient.id}" />
+                        <span th:text="${ingredient.name}">INGREDIENT</span>
+                    </div>
+                </div>
+                <div class="ingredient-group" id="cheeses">
+                    <h3>Choose your cheese:</h3>
+                    <div th:each="ingredient: ${cheese}">
+                        <input name="ingredients" type="checkbox" th:value="${ingredient.id}" />
+                        <span th:text="${ingredient.name}">INGREDIENT</span>
+                    </div>
+                </div>
+                <div class="ingredient-group" id="veggies">
+                    <h3>Determine your veggies:</h3>
+                    <div th:each="ingredient: ${veggies}">
+                        <input name="ingredients" type="checkbox" th:value="${ingredient.id}" />
+                        <span th:text="${ingredient.name}">INGREDIENT</span>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <h3>Name your Pizza:</h3>
+                <input type="text" th:field="*{name}"/>
+                <span class="validationError" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+                <br/>
+                <button>Order</button>
+            </div>
+        </form>
+    </body>
+</html>

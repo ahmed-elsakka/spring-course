@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Pizza Maker</title>
+    <link rel="stylesheet" th:href="@{/styles.css}" />
+</head>
+    <body>
+        <form method="post" th:action="@{/orders}" th:object="${order}">
+            <h1>Order your pizza!</h1>
+            <img th:src="@{/images/Logo.png}"/>
+            <a th:href="@{/design}" id="another">Make another pizza</a><br/>
+
+
+            <h3>Deliver to...</h3>
+            <label for="name">Name: </label>
+            <input type="text" th:field="*{name}"/>
+            <span class="validationError" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+            <br/>
+
+            <label for="street">Street address: </label>
+            <input type="text" th:field="*{street}"/>
+            <span class="validationError" th:if="${#fields.hasErrors('street')}" th:errors="*{street}"></span>
+            <br/>
+
+            <label for="city">City: </label>
+            <input type="text" th:field="*{city}"/>
+            <span class="validationError" th:if="${#fields.hasErrors('city')}" th:errors="*{city}"></span>
+            <br/>
+
+            <h3>Here's how I'll pay...</h3>
+            <label for="ccNumber">Credit Card #: </label>
+            <input type="text" th:field="*{cardNumber}"/>
+            <span class="validationError" th:if="${#fields.hasErrors('cardNumber')}" th:errors="*{cardNumber}"></span>
+            <br/>
+            <label for="ccExpiration">Expiration: </label>
+            <input type="text" th:field="*{cardExpiration}"/>
+            <span class="validationError" th:if="${#fields.hasErrors('cardExpiration')}" th:errors="*{cardExpiration}"></span>
+            <br/>
+
+            <label for="ccCVV">CVV: </label>
+            <input type="text" th:field="*{cardCVV}"/>
+            <span class="validationError" th:if="${#fields.hasErrors('cardCVV')}" th:errors="*{cardCVV}"></span>
+            <br/>
+
+            <input type="submit" value="Submit order"/>
+        </form>
+    </body>
+</html>
